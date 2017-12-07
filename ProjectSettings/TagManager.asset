@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - miss
+  - ball
+  - balloon
+  - goal
+  - stadium
+  - LevelButton
+  - keeper
   layers:
   - Default
   - TransparentFX

@@ -7,11 +7,14 @@ public class Balloon : MonoBehaviour {
 	[SerializeField] GameObject AuraEffectPrefab;
 	[SerializeField] GameObject BalloonEffectPrefab;
 	[SerializeField] GameObject DustStormPrefab;
+	[SerializeField] GameObject TorchsPrefab;
 	[SerializeField] int ZoneRate = 2;
 
 	public AudioClip BalloonBreakAudio;
 	public AudioClip BalloonGlitterAudio;
 	AudioSource audio;
+
+	public Material NightSkyMaterial;
 
 	ScoreManager scoreManager;
 
@@ -31,10 +34,12 @@ public class Balloon : MonoBehaviour {
 		Instantiate(BalloonEffectPrefab, transform.position, transform.rotation);
 		Instantiate(DustStormPrefab, Vector3.zero, Quaternion.identity);			
 		Instantiate(AuraEffectPrefab, Camera.main.transform.position, Quaternion.identity);			
+		Instantiate(TorchsPrefab,  Vector3.zero, Quaternion.identity);			
+		ChangeSkybox();
 
 		audio.PlayOneShot(BalloonBreakAudio, 1f);
 
-		transform.position = new Vector3(transform.position.x, -15f, transform.position.z);
+		transform.position = new Vector3(transform.position.x, -25f, transform.position.z);
 
 		yield return new WaitForSeconds(1f);
 
@@ -43,6 +48,10 @@ public class Balloon : MonoBehaviour {
 		yield return new WaitForSeconds(10f);
 
 		Destroy(gameObject);
+	}
+
+	void ChangeSkybox() {
+		RenderSettings.skybox = NightSkyMaterial;
 	}
 
 }

@@ -302,9 +302,12 @@ MonoBehaviour:
     type: 2}
   BalloonEffectPrefab: {fileID: 100012, guid: 4bc8dc28f9ba24e57a0d84aa5db5e48d, type: 2}
   DustStormPrefab: {fileID: 100000, guid: 1f7aa4d40edff6e48b549003cad031e1, type: 2}
+  TorchsPrefab: {fileID: 1112244675946650, guid: 0f67f7005afb97a42977dda28ecd949d,
+    type: 2}
   ZoneRate: 2
   BalloonBreakAudio: {fileID: 8300000, guid: 236d1ba3e3dc1b943ba4345293189e64, type: 3}
   BalloonGlitterAudio: {fileID: 8300000, guid: 22503a6abae8a534281630e3ba8c6ee1, type: 3}
+  NightSkyMaterial: {fileID: 2100000, guid: d07d2172e76d3fa429e80a14d2ae3616, type: 2}
 --- !u!136 &136836805264229044
 CapsuleCollider:
   m_ObjectHideFlags: 1
