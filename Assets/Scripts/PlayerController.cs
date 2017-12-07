@@ -11,8 +11,12 @@ public class PlayerController : MonoBehaviour {
 
 	GameFlowManager gameFlowManager;
 
+	[SerializeField] AudioClip HeadingAudio;
+	AudioSource audio;
+
 	void Awake() {
 		gameFlowManager = GameFlowManager.Instance;
+		audio = GetComponent<AudioSource>();
 	}
 
 	void Update () {
@@ -31,6 +35,7 @@ public class PlayerController : MonoBehaviour {
 		);
 
 		if(other.tag == "ball") {
+			audio.PlayOneShot(HeadingAudio, 0.3f);
 			StartCoroutine("AutoShowResult", other);
 		}
 	}

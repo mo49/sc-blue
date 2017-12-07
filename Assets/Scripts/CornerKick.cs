@@ -14,10 +14,14 @@ public class CornerKick : MonoBehaviour {
 
 	GameFlowManager gameFlowManager;
 
+	AudioSource audio;
+	public AudioClip KickinAudio;
+
 	void Awake() {
 		m_KickerTransform = transform;
 		gameFlowManager = GameFlowManager.Instance;
 		gameFlowManager.setCornerKickAutoState(isAuto);
+		audio = GetComponent<AudioSource>();
 	}
 
 	void Update () {
@@ -57,6 +61,8 @@ public class CornerKick : MonoBehaviour {
 	}
 
 	IEnumerator Shoot() {
+		audio.PlayOneShot(KickinAudio, 1f);
+
 		Transform m_ProjectileTransform = Instantiate (
 			m_ProjectilePrefab,
 			m_KickerTransform.position + new Vector3 (0f,0f,0f),

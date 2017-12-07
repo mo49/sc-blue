@@ -5,22 +5,26 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Goal : MonoBehaviour {
 
-	public AudioClip AudienceGoal;
-	public AudioClip AudienceMiss;
+	public AudioClip AudienceGoalAudio;
+	public AudioClip AudienceMissAudio;
+	public AudioClip BallBombAudio;
 	AudioSource audio;
 
 	void Awake() {
 		audio = GetComponent<AudioSource>();
 	}
+
+	void ballBambSound() {
+		audio.PlayOneShot(BallBombAudio, 1.0f);
+	}
 		
 	void audienceSound(string type) {
-		Debug.Log("audience audience  sound");
 		switch(type) {
 			case "goal":
-				audio.PlayOneShot(AudienceGoal, 1.0f);
+				audio.PlayOneShot(AudienceGoalAudio, 1.0f);
 				break;
 			case "miss":
-				audio.PlayOneShot(AudienceMiss, 1.0f);
+				audio.PlayOneShot(AudienceMissAudio, 1.0f);
 				break;
 		}
 	}

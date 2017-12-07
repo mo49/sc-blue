@@ -962,6 +962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 20
+  HeadingAudio: {fileID: 0}
 --- !u!54 &904996039
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2211,8 +2212,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65bdcca98739df438c65f2881c3aa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireworkPrefab: {fileID: 100002, guid: 180149b1a35449044a27b451e816d2de, type: 2}
-  explosion: {fileID: 8300000, guid: 0c174801aa2100742888236e00b32593, type: 3}
+  AudienceGoalAudio: {fileID: 0}
+  AudienceMissAudio: {fileID: 0}
+  BallBombAudio: {fileID: 0}
 --- !u!1 &1704083976
 GameObject:
   m_ObjectHideFlags: 0

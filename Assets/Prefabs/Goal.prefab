@@ -923,8 +923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65bdcca98739df438c65f2881c3aa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudienceGoal: {fileID: 8300000, guid: 8c119d76f2c4d0d41987184c091deeea, type: 3}
-  AudienceMiss: {fileID: 8300000, guid: 3bffa776137f91e4091f54b42c122805, type: 3}
+  AudienceGoalAudio: {fileID: 8300000, guid: 8c119d76f2c4d0d41987184c091deeea, type: 3}
+  AudienceMissAudio: {fileID: 8300000, guid: 3bffa776137f91e4091f54b42c122805, type: 3}
+  BallBombAudio: {fileID: 8300000, guid: 856ebb0ad93144e4fa3269101fd93d0b, type: 3}
 --- !u!114 &114361455130657772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -936,5 +937,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d65bdcca98739df438c65f2881c3aa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudienceGoal: {fileID: 0}
-  AudienceMiss: {fileID: 0}
+  AudienceGoalAudio: {fileID: 0}
+  AudienceMissAudio: {fileID: 0}
+  BallBombAudio: {fileID: 0}

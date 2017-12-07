@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BallController : MonoBehaviour {
 
 	[SerializeField] GameObject Goal;
+	[SerializeField] GameObject SoundManager;
 	[SerializeField] GameObject ExplosionPrefab;
 	[SerializeField] GameObject BalloonPrefab;
 	[SerializeField] GameObject FireworkPrefab;
@@ -14,7 +15,7 @@ public class BallController : MonoBehaviour {
 
 	Text ShootResultText;
 
-	[SerializeField] int clearScore = 10;
+	[SerializeField] int clearScore = 1;
 	int currentPlayerScore;
 	int currentKeeperScore;
 
@@ -26,10 +27,11 @@ public class BallController : MonoBehaviour {
 	bool isResulted = false;
 
 	void Awake() {
+		SoundManager = Instantiate(SoundManager) as GameObject;
+		Goal = Instantiate(Goal) as GameObject;
+
 		ScoreBoard = GameObject.Find("ScoreBoardGUI");		
 		Result = GameObject.Find("Result");
-
-		Goal = Instantiate(Goal) as GameObject;
 
 		levelManager = LevelManager.Instance;
 		scoreManager = ScoreManager.Instance;
@@ -60,6 +62,7 @@ public class BallController : MonoBehaviour {
 			// effect
 			if(zoneManager.getZoneState()) {
 				Instantiate(ExplosionPrefab, transform.position, transform.rotation);
+				Goal.SendMessage("ballBambSound");
 			}
 
 			// sound
@@ -162,7 +165,7 @@ public class BallController : MonoBehaviour {
 			yield return new WaitForSeconds(2f);
 			Result.SendMessage("DrawResult");
 			// 高得点演出
-			if(scoreManager.getPlayerScore() >= 20) {
+			if(scoreManager.getPlayerScore() >= clearScore) {
 				Firework();
 			}
 			Remove();
@@ -182,8 +185,8 @@ public class BallController : MonoBehaviour {
 				new Vector3(Random.Range(-20f,20f), 0f, Random.Range(30f,45f)),
 				Quaternion.Euler(-90f,0f,0f)
 			);
-			//firework.GetComponent<ParticleSystem>().Play();
 		}
+		SoundManager.SendMessage("FireworksSound");
 	}
 
 	void Remove() {
