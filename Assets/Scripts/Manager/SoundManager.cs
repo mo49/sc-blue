@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour {
 
 	public AudioClip FireworksAudio;
+	public AudioClip EndWhistleAudio;
 
 	AudioSource audio;
 
@@ -12,7 +13,11 @@ public class SoundManager : MonoBehaviour {
 		audio = GetComponent<AudioSource>();
 	}
 
-	void FireworksSound() {
+	public void PlayFireworksSound() {
 		audio.PlayOneShot(FireworksAudio, 1f);
+	}
+
+	public void PlayEndWhistleSound() {
+		audio.PlayOneShot(EndWhistleAudio, 1f);
 	}
 }

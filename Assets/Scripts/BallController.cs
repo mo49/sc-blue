@@ -12,6 +12,7 @@ public class BallController : MonoBehaviour {
 	GameObject Result;
 	GameObject ScoreBoard;
 	Goal GoalScript;
+	SoundManager SoundManagerScript;
 
 	Text ShootResultText;
 
@@ -27,8 +28,7 @@ public class BallController : MonoBehaviour {
 	bool isResulted = false;
 
 	void Awake() {
-		SoundManager = Instantiate(SoundManager) as GameObject;
-
+		SoundManagerScript = GameObject.Find("SoundManager").GetComponent<SoundManager>();
 		GoalScript = GameObject.Find("Goal").GetComponent<Goal>();
 
 		ScoreBoard = GameObject.Find("ScoreBoardGUI");		
@@ -101,7 +101,7 @@ public class BallController : MonoBehaviour {
 		}
 	}
 
-	void addPlayerScore() {
+	public void addPlayerScore() {
 		Debug.Log("goal!!!");
 
 		ScoreBoard.SendMessage("UpdateScore", "player");
@@ -110,7 +110,7 @@ public class BallController : MonoBehaviour {
 		isResulted = true;
 	}
 
-	void addKeeperScore() {
+	public void addKeeperScore() {
 		Debug.Log("miss...");
 
 		ScoreBoard.SendMessage("UpdateScore", "keeper");
@@ -119,7 +119,7 @@ public class BallController : MonoBehaviour {
 		isResulted = true;
 	}
 
-	void intoZone() {
+	public void intoZone() {
 		Debug.Log("into Zone!!!");
 
 		zoneManager.setZoneState(true);
@@ -163,10 +163,15 @@ public class BallController : MonoBehaviour {
 		// 終了なら結果画面へ
 		if(gameFlowManager.getGameFinishState()) {
 			ShootResultText.text = "";
+			SoundManagerScript.PlayEndWhistleSound();
+
 			yield return new WaitForSeconds(2f);
 			Result.SendMessage("DrawResult");
 			// 高得点演出
-			if(scoreManager.getPlayerScore() >= clearScore) {
+			if(
+				scoreManager.getPlayerScore() > scoreManager.getKeeperScore() &&
+				scoreManager.getPlayerScore() >= clearScore
+			) {
 				Firework();
 			}
 			Remove();
@@ -180,14 +185,15 @@ public class BallController : MonoBehaviour {
 	}
 
 	void Firework() {
-		for (int i = 0; i < 5; i++){
+		int fireworksNum = levelManager.getLevel() * 5;
+		for (int i = 0; i < fireworksNum; i++){
 			Instantiate(
 				FireworkPrefab,
 				new Vector3(Random.Range(-20f,20f), 0f, Random.Range(30f,45f)),
 				Quaternion.Euler(-90f,0f,0f)
 			);
 		}
-		SoundManager.SendMessage("FireworksSound");
+		SoundManagerScript.PlayFireworksSound();
 	}
 
 	void Remove() {

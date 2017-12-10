@@ -7,8 +7,9 @@ public class GameManager : MonoBehaviour {
 	LevelManager levelManager;
 	[SerializeField] GameObject KeeperPrefab;
 	int keeperNum = 1;
-	int firingAngle;
+	int firingAngle = 45;
 	float cameraDistance;
+	bool goalMoving = false;
 
 	GameObject Goal;
 
@@ -26,23 +27,33 @@ public class GameManager : MonoBehaviour {
 			firingAngle = 45;
 			cameraDistance = 20f;
 			keeperNum = 1;
+			goalMoving = false;
 			break;
 		case 2:
 			firingAngle = 40;
-			cameraDistance = 18f;
+			cameraDistance = 19f;
 			keeperNum = 2;
+			goalMoving = false;
 			break;
 		case 3:
 			firingAngle = 35;
+			cameraDistance = 18f;
+			keeperNum = 3;
+			goalMoving = false;
+			break;
+		case 4:
+			firingAngle = 30;
 			cameraDistance = 15f;
 			keeperNum = 3;
+			goalMoving = true;
 			break;
 		}
 
 		GameObject.Find("CornerKick").GetComponent<CornerKick> ().firingAngle = firingAngle;
 		GameObject.Find ("Fove Rig").transform.position = new Vector3 (0, 1.4f, cameraDistance);
+		Goal.GetComponent<GoalMove>().enabled = goalMoving;
 
-		for (int i = 0; i < level; i++) {
+		for (int i = 0; i < keeperNum; i++) {
 			createKeeper(i+1);
 		}
 	}

@@ -36,15 +36,15 @@ public class PlayerController : MonoBehaviour {
 		if(zoneManager.getZoneState())
 			power = zonePower;
 
-		Rigidbody rb = other.GetComponent<Rigidbody> ();
-		//Vector3 vel = (other.transform.position - transform.position).normalized * power;
-		rb.useGravity = true;
-		rb.AddForce (
-			transform.forward * power * Mathf.Clamp(Mathf.Abs(accel.z), 1f, 20f),
-			ForceMode.VelocityChange
-		);
-
 		if(other.tag == "ball") {
+			Rigidbody rb = other.GetComponent<Rigidbody> ();
+			rb.useGravity = true;
+			//Vector3 vel = (other.transform.position - transform.position).normalized * power;
+			rb.AddForce (
+				transform.forward * power * Mathf.Clamp(Mathf.Abs(accel.z), 1f, 3f),
+				ForceMode.VelocityChange
+			);
+
 			audio.PlayOneShot(HeadingAudio, 0.3f);
 			if(zoneManager.getZoneState())
 				DeactivateKeeper();

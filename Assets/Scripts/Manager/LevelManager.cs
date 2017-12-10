@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour {
 			case 1: name = "Easy"; break;
 			case 2: name = "Normal"; break;
 			case 3: name = "Hard"; break;
+			case 4: name = "Super"; break;
 		}
 		return name;
 	}

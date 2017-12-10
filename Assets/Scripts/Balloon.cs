@@ -39,6 +39,7 @@ public class Balloon : MonoBehaviour {
 
 		audio.PlayOneShot(BalloonBreakAudio, 1f);
 
+		// 隠す！
 		transform.position = new Vector3(transform.position.x, -25f, transform.position.z);
 
 		yield return new WaitForSeconds(1f);

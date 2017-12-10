@@ -13,9 +13,11 @@ public class CornerKick : MonoBehaviour {
 	public float gravity = 9.8f;
 	public float firingAngle = 45.0f;
 
+
 	GameFlowManager gameFlowManager;
 
 	AudioSource audio;
+	public AudioClip WhistleKickinAudio;
 	public AudioClip KickinAudio;
 
 	GameObject[] Keepers;
@@ -64,11 +66,11 @@ public class CornerKick : MonoBehaviour {
 	}
 
 	IEnumerator Shoot() {
-		audio.PlayOneShot(KickinAudio, 1f);
+		audio.PlayOneShot(WhistleKickinAudio, 1f);
 
 		GameObject m_Projectile = Instantiate (
 			m_ProjectilePrefab,
-			m_KickerTransform.position + new Vector3 (0f,0f,0f),
+			m_KickerTransform.position + new Vector3 (0f,0.5f,0f),
 			Quaternion.identity
 		);
 
@@ -80,6 +82,8 @@ public class CornerKick : MonoBehaviour {
 		}
 
 		yield return new WaitForSeconds(delayShoot);
+
+		audio.PlayOneShot(KickinAudio, 1f);
 
 		float target_distance = Vector3.Distance (m_ProjectileTransform.position, m_Target.position);
 		float projectile_velocity = target_distance / (Mathf.Sin(2 * firingAngle * Mathf.Deg2Rad) / gravity);
