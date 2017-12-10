@@ -740,6 +740,7 @@ GameObject:
   - component: {fileID: 11400000}
   - component: {fileID: 54101117880580822}
   - component: {fileID: 136054736001879196}
+  - component: {fileID: 114019812406550438}
   m_Layer: 0
   m_Name: unitychan
   m_TagString: keeper
@@ -4479,7 +4480,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100276}
-  m_LocalRotation: {x: -0.09374654, y: 0.6978552, z: 0.70746905, w: 0.060806744}
+  m_LocalRotation: {x: -0.093746535, y: 0.6978551, z: 0.707469, w: 0.060806736}
   m_LocalPosition: {x: -0.05543403, y: 0.0017306843, z: 0.098653734}
   m_LocalScale: {x: 1.0000004, y: 1.0000006, z: 1.0000005}
   m_Children:
@@ -6524,6 +6525,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &114019812406550438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 683e1b05b78438b45be6a0d5fbe8b4c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136054736001879196
 CapsuleCollider:
   m_ObjectHideFlags: 1

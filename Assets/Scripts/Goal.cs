@@ -14,11 +14,11 @@ public class Goal : MonoBehaviour {
 		audio = GetComponent<AudioSource>();
 	}
 
-	void ballBambSound() {
+	public void ballBambSound() {
 		audio.PlayOneShot(BallBombAudio, 1.0f);
 	}
 		
-	void audienceSound(string type) {
+	public void audienceSound(string type) {
 		switch(type) {
 			case "goal":
 				audio.PlayOneShot(AudienceGoalAudio, 1.0f);

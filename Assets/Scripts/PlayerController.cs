@@ -40,27 +40,15 @@ public class PlayerController : MonoBehaviour {
 		//Vector3 vel = (other.transform.position - transform.position).normalized * power;
 		rb.useGravity = true;
 		rb.AddForce (
-			transform.forward * power * Mathf.Clamp(Mathf.Abs(accel.z), 1f, 2f),
+			transform.forward * power * Mathf.Clamp(Mathf.Abs(accel.z), 1f, 20f),
 			ForceMode.VelocityChange
 		);
 
 		if(other.tag == "ball") {
 			audio.PlayOneShot(HeadingAudio, 0.3f);
-			StartCoroutine("AutoShowResult", other);
 			if(zoneManager.getZoneState())
 				DeactivateKeeper();
 		}
-	}
-
-	IEnumerator AutoShowResult(Collider other) {
-		yield return new WaitForSeconds(5);
-
-		if(gameFlowManager.getEntireShootFlowState()){
-			yield break;
-		}
-
-		// どこにも当たらなかった場合
-		other.SendMessage("addKeeperScore");
 	}
 
 	void ActivateKeeper() {

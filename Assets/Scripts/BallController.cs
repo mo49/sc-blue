@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class BallController : MonoBehaviour {
 
-	[SerializeField] GameObject Goal;
 	[SerializeField] GameObject SoundManager;
 	[SerializeField] GameObject ExplosionPrefab;
 	[SerializeField] GameObject BalloonPrefab;
 	[SerializeField] GameObject FireworkPrefab;
 	GameObject Result;
 	GameObject ScoreBoard;
+	Goal GoalScript;
 
 	Text ShootResultText;
 
@@ -28,7 +28,8 @@ public class BallController : MonoBehaviour {
 
 	void Awake() {
 		SoundManager = Instantiate(SoundManager) as GameObject;
-		Goal = Instantiate(Goal) as GameObject;
+
+		GoalScript = GameObject.Find("Goal").GetComponent<Goal>();
 
 		ScoreBoard = GameObject.Find("ScoreBoardGUI");		
 		Result = GameObject.Find("Result");
@@ -62,11 +63,11 @@ public class BallController : MonoBehaviour {
 			// effect
 			if(zoneManager.getZoneState()) {
 				Instantiate(ExplosionPrefab, transform.position, transform.rotation);
-				Goal.SendMessage("ballBambSound");
+				GoalScript.ballBambSound();
 			}
 
 			// sound
-			Goal.SendMessage("audienceSound", "goal");
+			GoalScript.audienceSound("goal");
 		}
 		if(other.tag == "miss"){
 			if(isResulted){
@@ -76,7 +77,7 @@ public class BallController : MonoBehaviour {
 			addKeeperScore();
 
 			// sound
-			Goal.SendMessage("audienceSound", "miss");
+			GoalScript.audienceSound("miss");
 		}
 		if(other.tag == "balloon") {
 			intoZone();

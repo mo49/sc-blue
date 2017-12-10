@@ -10,7 +10,11 @@ public class GameManager : MonoBehaviour {
 	int firingAngle;
 	float cameraDistance;
 
+	GameObject Goal;
+
 	void Start() {
+		Goal = GameObject.Find("Goal");
+
 		levelManager = LevelManager.Instance;
 		int currentLevel = levelManager.getLevel ();
 		setDifficulityByLevel (currentLevel);
@@ -24,12 +28,12 @@ public class GameManager : MonoBehaviour {
 			keeperNum = 1;
 			break;
 		case 2:
-			firingAngle = 30;
+			firingAngle = 40;
 			cameraDistance = 18f;
 			keeperNum = 2;
 			break;
 		case 3:
-			firingAngle = 15;
+			firingAngle = 35;
 			cameraDistance = 15f;
 			keeperNum = 3;
 			break;
@@ -57,6 +61,9 @@ public class GameManager : MonoBehaviour {
 				break;
 		}
 		Vector3 vel = new Vector3(x, 0f, 30f);
-		Instantiate(KeeperPrefab, vel, Quaternion.Euler(0f,180f,0f));
+		var keeperInstance = Instantiate(KeeperPrefab, vel, Quaternion.Euler(0f,180f,0f));
+
+		// goalの子として追加
+		keeperInstance.transform.parent = Goal.transform;
 	}
 }

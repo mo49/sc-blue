@@ -8,6 +8,7 @@ public class CornerKick : MonoBehaviour {
 	[SerializeField] Transform m_Target;
 	[SerializeField] Transform m_KickerTransform;
 	[SerializeField] GameObject m_ProjectilePrefab;
+
 	public float delayShoot = 1f;
 	public float gravity = 9.8f;
 	public float firingAngle = 45.0f;
@@ -16,6 +17,8 @@ public class CornerKick : MonoBehaviour {
 
 	AudioSource audio;
 	public AudioClip KickinAudio;
+
+	GameObject[] Keepers;
 
 	void Awake() {
 		m_KickerTransform = transform;
@@ -63,11 +66,18 @@ public class CornerKick : MonoBehaviour {
 	IEnumerator Shoot() {
 		audio.PlayOneShot(KickinAudio, 1f);
 
-		Transform m_ProjectileTransform = Instantiate (
+		GameObject m_Projectile = Instantiate (
 			m_ProjectilePrefab,
 			m_KickerTransform.position + new Vector3 (0f,0f,0f),
 			Quaternion.identity
-		).transform;
+		);
+
+		Transform m_ProjectileTransform = m_Projectile.transform;
+
+		Keepers = GameObject.FindGameObjectsWithTag("keeper");
+		foreach (var keeper in Keepers){
+			keeper.GetComponent<Keeper>().SetBallTransform(m_Projectile);
+		}
 
 		yield return new WaitForSeconds(delayShoot);
 
@@ -92,5 +102,23 @@ public class CornerKick : MonoBehaviour {
 			elapsed_time += Time.deltaTime;
 			yield return null;
 		}
+
+		// ボールが目標地点に到達
+		Rigidbody rb = m_Projectile.GetComponent<Rigidbody> ();
+		rb.useGravity = true;
+
+		StartCoroutine("AutoShowResult", m_Projectile);
 	}
+
+	IEnumerator AutoShowResult(GameObject ball) {
+		yield return new WaitForSeconds(5);
+
+		if(gameFlowManager.getEntireShootFlowState()){
+			yield break;
+		}
+
+		// どこにも当たらなかった場合
+		ball.SendMessage("addKeeperScore");
+	}
+
 }
